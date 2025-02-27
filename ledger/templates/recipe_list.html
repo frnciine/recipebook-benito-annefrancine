@@ -2,18 +2,12 @@
 
 {% load static %}
 
-{% block title %}Recipe Book{% endblock %}
+{% block title %}Recipe List{% endblock %}
 {% block content %}
     <ul>
         {% for recipe in recipes %}
         <li>
-            {{ recipe.name }}
-            <ul>
-                {% for ingredient in recipe.ingredients %}
-                <li>{{ ingredient.name }}:{{ ingredient.quantity }}</li>
-                {% endfor %}
-            </ul>   
-            <a href="{{ recipe.link }}">Recipe Link</a>
+            {{ recipe.name }}: <a href="{{ recipe.link }}">Recipe</a>
         </li>
         {% endfor %}
     </ul>
