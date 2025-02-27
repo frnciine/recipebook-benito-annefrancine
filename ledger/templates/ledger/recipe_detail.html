@@ -6,10 +6,10 @@
 {% block content %}
     <ul>
         <li>
-            {{ name }}
+            {{ recipe.name }}
             <ul>
-                {% for ingredient in ingredients %}
-                <li>{{ ingredient.name }}:{{ ingredient.quantity }}</li>
+                {% for ingredient in recipe.ingredients.all %}
+                <li>{{ ingredient.ingredient.name }}: {{ ingredient.quantity }}</li>
                 {% endfor %}
             </ul>
         </li>
