@@ -4,6 +4,7 @@
 
 {% block title %}Recipe List{% endblock %}
 {% block content %}
+    <h2>Recipe List</h2>
     <ul>
         {% for recipes in object_list %}
         <li>
@@ -11,4 +12,13 @@
         </li>
         {% endfor %}
     </ul>
+    {% if request.user.is_authenticated %}
+        <p>Welcome {{request.user.username }}</p>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
 {% endblock %}

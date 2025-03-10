@@ -4,14 +4,19 @@
 
 {% block title %}Recipe Book{% endblock %}
 {% block content %}
+    <h2>{{ recipe.name }}</h2>
     <ul>
-        <li>
-            {{ recipe.name }}
-            <ul>
-                {% for ingredient in recipe.ingredients.all %}
-                <li>{{ ingredient.ingredient.name }}: {{ ingredient.quantity }}</li>
-                {% endfor %}
-            </ul>
-        </li>
+        {% for ingredient in recipe.ingredients.all %}
+        <li>{{ ingredient.ingredient.name }}: {{ ingredient.quantity }}</li>
+        {% endfor %}
     </ul>
+    <p>Created on: {{ recipe.created_on }}</p>
+    <p>Updated on: {{ recipe.updated_on }}</p>
+    <p>Author: {{ recipe.author }}</p>
+    {% if request.user.is_authenticated %}
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% endif %}
 {% endblock %}
