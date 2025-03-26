@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Recipe Book{% endblock %}
+{% block content %}
+    <h2>Add Recipe</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Add</button>
+    </form>
+    
+    <a href="{% url 'ledger:recipe-list' %}">Recipe List</a>
+{% endblock %}

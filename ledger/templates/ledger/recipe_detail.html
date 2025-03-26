@@ -4,19 +4,26 @@
 
 {% block title %}Recipe Book{% endblock %}
 {% block content %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
     <h2>{{ recipe.name }}</h2>
     <ul>
         {% for ingredient in recipe.ingredients.all %}
         <li>{{ ingredient.ingredient.name }}: {{ ingredient.quantity }}</li>
         {% endfor %}
     </ul>
+    {% for image in recipe.images.all %}
+        <img src="{{ image.image.url }}" alt="{{ image.description }}">
+    {% endfor %}
     <p>Created on: {{ recipe.created_on }}</p>
     <p>Updated on: {{ recipe.updated_on }}</p>
     <p>Author: {{ recipe.author }}</p>
     {% if request.user.is_authenticated %}
+        <p><a href="{% url 'ledger:recipe-add-image' pk=recipe.pk%}">Upload image</a></p>
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit">Logout</button>
         </form>
+    {% else %}
+        <p><a href="{% url 'login' %}">Login to Upload</a></p>
     {% endif %}
 {% endblock %}
